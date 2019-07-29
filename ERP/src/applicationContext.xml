@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- 仓库盘点表的bean -->
+	<bean id="CheckTableAction" class="com.erp.action.CheckTableAction">
+		<property name="service" ref="CheckTableService"></property>
+		<property name="goodsService" ref="goodsService"></property>
+		<property name="userService" ref="userInfoService"></property>
+	</bean>
+	<bean id="CheckTableService" class="com.erp.service.impl.CheckTableServiceImpl">
+		<property name="dao" ref="CheckTableDAO"></property>
+	</bean>
+	<bean id="CheckTableDAO" class="com.erp.dao.impl.CheckTableDAOImpl">
+		<property name="sessionFactoy" ref="sessionFactory"></property>
+	</bean>
+	
+	
+	<!-- 仓库盘点表视图的bean -->
+	<bean id="TbvNewDetailAction" class ="com.erp.action.TbvNewDetailAction">
+	<property name="service" ref="TbvNewDetailService"></property>
+	
+	</bean>
+	<bean id="TbvNewDetailService" class="com.erp.service.impl.TbvNewDetailServiceImpl">
+		<property name="dao" ref="TbvNewDetailDAO"></property>
+	</bean>
+	<bean id="TbvNewDetailDAO" class="com.erp.dao.impl.TbvNewDetailDAOImpl">
+		<property name="sessionFactoy" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- Client -->
+	<bean id="clientAction" class="com.erp.action.ClientAction">
+		<property name="cs" ref="clientService"></property>
+	</bean>
+	<bean id="clientService" class="com.erp.service.impl.ClientServiceImpl">
+		<property name="dao" ref="clientDAO"></property>
+	</bean>
+	<bean id="clientDAO" class="com.erp.dao.impl.ClientDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- Supplier -->
+	<bean id="supplierAction" class="com.erp.action.SupplierAction">
+		<property name="ss" ref="supplierService"></property>
+	</bean>
+	<bean id="supplierService" class="com.erp.service.impl.SupplierServiceImpl">
+		<property name="dao" ref="supplierDAO"></property>
+	</bean>
+	<bean id="supplierDAO" class="com.erp.dao.impl.SupplierDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- Goods -->
+	<bean id="goodsAction" class="com.erp.action.GoodsAction">
+		<property name="gs" ref="goodsService"></property>
+		<property name="ss" ref="supplierService"></property>
+	</bean>
+	<bean id="goodsService" class="com.erp.service.impl.GoodsServiceImpl">
+		<property name="dao" ref="goodsDAO"></property>
+	</bean>
+	<bean id="goodsDAO" class="com.erp.dao.impl.GoodsDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- Sale -->
+	<bean id="saleAction" class="com.erp.action.SaleAction">
+		<property name="ss" ref="saleService"></property>
+		<property name="cs" ref="clientService"></property>
+		<property name="gs" ref="goodsService"></property>
+		<property name="sds" ref="saleDetailService"></property>
+	</bean>
+	<bean id="saleService" class="com.erp.service.impl.SaleServiceImpl">
+		<property name="dao" ref="saleDAO"></property>
+	</bean>
+	<bean id="saleDAO" class="com.erp.dao.impl.SaleDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- SaleDetail -->
+	<bean id="saleDetailService" class="com.erp.service.impl.SaleDetailServerImpl">
+		<property name="dao" ref="saleDetailDAO"></property>
+	</bean>
+	<bean id="saleDetailDAO" class="com.erp.dao.impl.SaleDetailDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置action service dao -->
+	<bean id="userInfoAction" class="com.erp.action.UserInfoAction">
+		<property name="service" ref="userInfoService"></property>
+	</bean>
+	<bean id="userInfoService" class="com.erp.service.impl.UserInfoServiceDaoImpl">
+		<property name="dao" ref="userInfoDAO"></property>
+	</bean>
+	<bean id="userInfoDAO" class="com.erp.dao.impl.UserInfoDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:LYCZ"></property>
+		<property name="username" value="erp"></property>
+		<property name="password" value="wanczy"></property>
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/erp/pojo/Menu.hbm.xml</value>
+				<value>com/erp/pojo/Supplier.hbm.xml</value>
+				<value>com/erp/pojo/SaleDetail.hbm.xml</value>
+				<value>com/erp/pojo/Dept.hbm.xml</value>
+				<value>com/erp/pojo/Goods.hbm.xml</value>
+				<value>com/erp/pojo/Purchase.hbm.xml</value>
+				<value>com/erp/pojo/Emp.hbm.xml</value>
+				<value>com/erp/pojo/PcDetail.hbm.xml</value>
+				<value>com/erp/pojo/Client.hbm.xml</value>
+				<value>com/erp/pojo/Sale.hbm.xml</value>
+				<value>com/erp/pojo/CheckTable.hbm.xml</value>
+				<value>com/erp/pojo/TbvNewDetail.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="do*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="REQUIRED" />
+			<tx:method name="login*" propagation="REQUIRED" />
+			<tx:method name="execute*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="ServiceMethods"
+			expression="execution(* com.erp.service.impl.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="ServiceMethods" />
+	</aop:config>
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table name="CLIENT" schema="ERP">
+		<column name="CLIENT_GRADE" type="java.lang.Integer"></column>
+		<column name="LINK_SEX" type="java.lang.Integer"></column>
+		<column name="CLIENT_DEL" type="java.lang.Integer"></column>
+	</table>
+	<table name="EMP" schema="ERP">
+		<column name="EMP_SEX" type="java.lang.Integer"></column>
+		<column name="EMP_LEAVE" type="java.lang.Integer"></column>
+	</table>
+	<table name="GOODS" schema="ERP">
+		<column name="GOODS_STOP" type="java.lang.Integer"></column>
+	</table>
+	<table name="PC_DETAIL" schema="ERP">
+		<column name="PC_DETAIL_DEL" type="java.lang.Integer"></column>
+	</table>
+	<table name="PURCHASE" schema="ERP">
+		<column name="PURCHASE_STATE" type="java.lang.Integer"></column>
+		<column name="PURCHASE_DEL" type="java.lang.Integer"></column>
+	</table>
+	<table name="SALE" schema="ERP">
+		<column name="SALE_STATE" type="java.lang.Integer"></column>
+		<column name="SALE_DEL" type="java.lang.Integer"></column>
+	</table>
+	<table name="SALE_DETAIL" schema="ERP">
+		<column name="SALE_DETAIL_DEL" type="java.lang.Integer"></column>
+	</table>
+	<table name="SUPPLIER" schema="ERP">
+		<column name="SUPPLIER_GRADE" type="java.lang.Integer"></column>
+		<column name="LINK_SEX" type="java.lang.Integer"></column>
+		<column name="SUPPLIER_DEL" type="java.lang.Integer"></column>
+	</table>
+</hibernate-reverse-engineering>

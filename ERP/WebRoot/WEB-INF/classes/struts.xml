@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	
+	<package name="abc" namespace="/" extends="json-default">
+		<action name="checkTable_*" class="CheckTableAction" method="{1}">
+			<result name="success" type="json">
+				<param name="root">resultContent</param>
+			</result>
+			<result name="suc">/jsp/kunge/CheckTableUpd.jsp</result>
+		</action>
+</package>
+		<package  name = "view" namespace="/" extends="json-default">
+		<action name="view_*" class="TbvNewDetailAction" method="{1}">
+			<result name="success" type="json">
+				<param name="root">resultContent</param>
+			</result>
+			<result name="suc">/jsp/kunge/CheckTableAdd.jsp</result>
+		</action>
+	    </package>
+	
+	<package name="client" namespace="/" extends="json-default">
+		<action name="client_*" class="clientAction" method="{1}">
+			<result name="success" type="json">
+				<param name="root">resultContent</param>
+			</result>
+			<result name="goUpd">/jsp/buyAndSale/ClientUpdate.jsp</result>
+		</action>
+	</package>
+	
+	<package name="supplier" namespace="/" extends="json-default">
+		<action name="supplier_*" class="supplierAction" method="{1}">
+			<result name="success" type="json">
+				<param name="root">resultContent</param>
+			</result>
+			<result name="goUpd">/jsp/buyAndSale/SupplierUpdate.jsp</result>
+		</action>
+	</package>
+	
+	<package name="goods" namespace="/" extends="json-default">
+		<action name="goods_*" class="goodsAction" method="{1}">
+			<result name="success" type="json">
+				<param name="root">resultContent</param>
+			</result>
+			<result name="goUpd">/jsp/buyAndSale/GoodsUpdate.jsp</result>
+		</action>
+	</package>
+	
+	<package name="sale" namespace="/" extends="json-default">
+		<action name="sale_*" class="saleAction" method="{1}">
+			<result name="success" type="json">
+				<param name="root">jsonA</param>
+			</result>
+			<result name="succ" type="json">
+				<param name="root">resultContent</param>
+			</result>
+			<result name="goUpd">/jsp/buyAndSale/SaleDetailUpdate.jsp</result>
+		</action>
+	</package>
+	
+	<package name="user" namespace="/" extends="json-default">
+			<action name="user_*" class="userInfoAction" method="{1}">
+				<result name="success" type="json">
+					<param name="root">resultContent</param>
+				</result>
+				<result name="succ" type="json">
+						<param name="root">resultContent</param>
+				</result>
+				<result name="suc" >/page/update.jsp</result>
+			</action>
+		</package>
+	
+</struts>    
